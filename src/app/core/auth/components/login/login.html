@@ -1,1 +1,19 @@
-<p>login works!</p>
+  <div class="body">
+      <div class="login-box" role="main" aria-label="Login form">
+        <h2>Welcome Back</h2>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <input type="text" id="username" name="username" placeholder="Username" formControlName="email" aria-label="Username" required />
+          <input type="password" id="password" name="password" placeholder="Password" formControlName="password" aria-label="Password" required />
+          <button type="submit">Login</button>
+          @if(loginErrorMsg){
+              <div class="invalidUser f-12 invalidUserPwd">{{loginErrorMsg}}</div>
+          }
+        </form>
+         <div class="signup-link cursor-pointer">
+    Go to <a routerLink="/signup">Sign Up</a>
+  </div>
+        </div>
+
+  </div>
+  

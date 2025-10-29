@@ -1,1 +1,40 @@
-<p>signup works!</p>
+
+  <div class="signup-box" role="main" aria-label="Sign up form">
+    <h2>Create Account</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <input type="text" formControlName="firstName" placeholder="First Name" />
+   <div *ngIf="f['firstName'].touched && f['firstName'].invalid" class="error">
+  First Name is required.
+</div>
+
+
+      <input type="text" formControlName="lastName" placeholder="Last Name" />
+      <div *ngIf="f['lastName'].touched && f['lastName'].invalid" class="error">Last Name is required.</div>
+
+      <input type="email" formControlName="email" placeholder="Email" />
+     <div *ngIf="f['email'].touched && f['email'].invalid" class="error">
+  Valid email is required.
+</div>
+
+      <input type="tel" formControlName="phoneNumber" placeholder="Phone Number" />
+      <div *ngIf="f['phoneNumber'].touched && f['phoneNumber'].invalid" class="error">
+  Phone number is required (10-15 digits).
+</div>
+      <input type="password" formControlName="password" placeholder="Password" />
+     <div *ngIf="f['password'].touched && f['password'].invalid" class="error">
+  Password must be at least 6 characters.
+</div>
+
+      <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" />
+    <div *ngIf="
+        f['confirmPassword'].touched &&
+        f['confirmPassword'].errors &&
+        f['confirmPassword'].errors['mismatch']
+      " class="error">
+        Passwords do not match.
+    </div>
+
+      <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+    </form>
+  </div>
+
