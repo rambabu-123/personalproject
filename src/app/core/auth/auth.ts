@@ -24,6 +24,26 @@ export class Auth {
   this.post(defaults, options);
 };
 
+getAllServices = (options: any) => {
+  const defaults = {
+    url: API_ENDPOINTS.getusers
+  };
+  this.get(defaults, options);
+};
+
+  getServiceDetails = (options: any) => {
+    const id = options?.data?.body;
+    if (!id) {
+      console.error('No ID provided for getServiceDetails');
+      return;
+    }
+
+    const defaults = {
+      url: `${API_ENDPOINTS.getUserDetails}/${id}`
+    };
+    this.get(defaults, options);
+  };
+
 post = (defaults: any, options: any) => {
     const settings = { ...defaults, ...options };
     const requestBody = settings.data?.body || {};
@@ -41,13 +61,25 @@ post = (defaults: any, options: any) => {
       }
     });
   };
-  //  getToken(): string | null {
-  //   return localStorage.getItem('authToken');
-  // }
 
-  // logout(): void {
-  //   localStorage.removeItem('authToken');
-  // }
+ 
+
+
+ get = (defaults: any, options: any) => {
+    const settings = { ...defaults, ...options };
+    this.http.get(settings.url).subscribe({
+      next: (response) => {
+        if (settings.success) settings.success(response);
+      },
+      error: (error) => {
+        if (settings.failure) settings.failure(error);
+      },
+      complete: () => {
+        if (settings.complete) settings.complete(true);
+      }
+    });
+  };
+
 }
  
 

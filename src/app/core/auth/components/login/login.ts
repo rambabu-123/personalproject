@@ -39,7 +39,8 @@ ngOnInit(): void {
         this.loginErrorMsg = this.loginInfo.message || '';
 
         if(res.user){
-          // this.router.navigate(['/landing']);
+          localStorage.setItem('token', res.user.user_id || 'dummy-token'); 
+          this.router.navigate(['/landing']);
         }
       },
       failure: (error: any) => {
